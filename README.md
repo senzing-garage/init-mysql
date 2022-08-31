@@ -13,14 +13,14 @@ To see all of the subcommands, run:
 
 ```console
 $ ./init-mysql.py
-usage: template-python.py [-h] {all,sleep,version,docker-acceptance-test} ...
+usage: init-mysql.py [-h] {mandatory,sleep,version,docker-acceptance-test} ...
 
-Add description. For more information, see https://github.com/Senzing/template-python
+Add description. For more information, see https://github.com/Senzing/init-mysql
 
 positional arguments:
-  {all,sleep,version,docker-acceptance-test}
+  {mandatory,sleep,version,docker-acceptance-test}
                         Subcommands (SENZING_SUBCOMMAND):
-    all                 Perform all initialization tasks.
+    mandatory           Perform mandatory initialization tasks.
     sleep               Do nothing but sleep. For Docker testing.
     version             Print version of program.
     docker-acceptance-test
@@ -28,7 +28,6 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
-
 ```
 
 ### Contents

@@ -208,7 +208,7 @@ def get_parser():
                 for argument, argument_value in arguments.items():
                     subcommand_value['arguments'][argument] = argument_value
 
-    parser = argparse.ArgumentParser(prog="init-mysql.py", description="Add description. For more information, see https://github.com/Senzing/template-python")
+    parser = argparse.ArgumentParser(prog="init-mysql.py", description="Add description. For more information, see https://github.com/Senzing/init-mysql")
     subparsers = parser.add_subparsers(dest='subcommand', help='Subcommands (SENZING_SUBCOMMAND):')
 
     for subcommand_key, subcommand_values in subcommands.items():
