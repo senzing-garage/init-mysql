@@ -2,12 +2,15 @@
 
 ## Synopsis
 
-Initialized a MySQL database for use with Senzing.
+Initializes a MySQL database for use with Senzing.
 
 ## Overview
 
-The [init-mysql.py](init-mysql.py) python script...
-The `senzing/init-mysql` docker image is a wrapper for use in docker formations (e.g. docker-compose, kubernetes).
+The [init-mysql.py](init-mysql.py) python script is a "run-to-completion" job
+that initializes an MySQL database.  It create the Senzing database schema
+and populates the database with an initial Senzing configuration.
+
+The `senzing/init-mysql` Docker image is a wrapper for use in Docker formations (e.g. docker-compose, kubernetes).
 
 To see all of the subcommands, run:
 
