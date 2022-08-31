@@ -242,7 +242,7 @@ These are "one-time tasks" which may already have been completed.
    Example:
 
     ```console
-    sudo docker run \
+    sudo --preserve-env docker run \
       --env SENZING_DATABASE_URL \
       --rm \
       senzing/init-mysql mandatory
