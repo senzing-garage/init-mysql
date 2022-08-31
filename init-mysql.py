@@ -735,7 +735,7 @@ def process_sql_file(input_url, db_parameters):
                         err_message = ' '.join(str(error).split())
                         logging.error(message_error(999, err_message))
                     except Exception as error:
-                        logging.error(message_error(999, "".format(type(error), ' '.join(str(error).split()))))
+                        logging.error(message_error(999, "{0} - {1}".format(type(error), ' '.join(str(error).split()))))
 
     if db_connection is not None:
         db_connection.close()
