@@ -28,6 +28,22 @@ RUN apt update \
       wget \
  && rm -rf /var/lib/apt/lists/*
 
+# MySQL support
+
+RUN wget https://dev.mysql.com/get/Downloads/Connector-ODBC/8.0/mysql-connector-odbc_8.0.20-1debian10_amd64.deb \
+ && wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-common_8.0.20-1debian10_amd64.deb \
+ && wget http://repo.mysql.com/apt/debian/pool/mysql-8.0/m/mysql-community/libmysqlclient21_8.0.20-1debian10_amd64.deb \
+ && apt update \
+ && apt -y install \
+      ./mysql-connector-odbc_8.0.20-1debian10_amd64.deb \
+      ./mysql-common_8.0.20-1debian10_amd64.deb \
+      ./libmysqlclient21_8.0.20-1debian10_amd64.deb \
+ && rm \
+      ./mysql-connector-odbc_8.0.20-1debian10_amd64.deb \
+      ./mysql-common_8.0.20-1debian10_amd64.deb \
+      ./libmysqlclient21_8.0.20-1debian10_amd64.deb \
+ && rm -rf /var/lib/apt/lists/*
+
 # Install packages via PIP.
 
 COPY requirements.txt .
