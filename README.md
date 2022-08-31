@@ -204,16 +204,6 @@ These are "one-time tasks" which may already have been completed.
 
 ## Demonstrate using Docker
 
-### Prerequisites for Docker
-
-:thinking: The following tasks need to be complete before proceeding.
-These are "one-time tasks" which may already have been completed.
-
-1. The following software programs need to be installed:
-    1. [docker](https://github.com/Senzing/knowledge-base/blob/main/HOWTO/install-docker.md)
-
-### Run Docker container
-
 1. :pencil2: Specify database connection information.
    Example:
 
