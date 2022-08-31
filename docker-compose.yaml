@@ -34,7 +34,7 @@ services:
   init-mysql:
     container_name: senzing-init-mysql
     depends_on:
-      - postgres
+      - mysql
     environment:
       LC_CTYPE: en_US.utf8
 #     See https://github.com/Senzing/init-postgresql#configuration

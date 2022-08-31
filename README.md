@@ -252,25 +252,7 @@ These are "one-time tasks" which may already have been completed.
 
 ## Demonstrate using docker-compose
 
-### Clone repository for docker-compose
-
-For more information on environment variables,
-see [Environment Variables](https://github.com/Senzing/knowledge-base/blob/main/lists/environment-variables.md).
-
-1. Set these environment variable values:
-
-    ```console
-    export GIT_ACCOUNT=senzing
-    export GIT_REPOSITORY=init-mysql
-    export GIT_ACCOUNT_DIR=~/${GIT_ACCOUNT}.git
-    export GIT_REPOSITORY_DIR="${GIT_ACCOUNT_DIR}/${GIT_REPOSITORY}"
-    ```
-
-1. Using the environment variables values just set, follow steps in [clone-repository](https://github.com/Senzing/knowledge-base/blob/main/HOWTO/clone-repository.md) to install the Git repository.
-
-### Volumes
-
-1. :pencil2: Specify the directory where Senzing should be installed on the local host.
+1. :pencil2: Specify a new directory to hold demonstration artifacts on the local host.
    Example:
 
     ```console
@@ -284,8 +266,9 @@ see [Environment Variables](https://github.com/Senzing/knowledge-base/blob/main/
        **Windows** - [File sharing](https://github.com/Senzing/knowledge-base/blob/main/HOWTO/share-directories-with-docker.md#windows)
        must be enabled for `SENZING_VOLUME`.
 
-1. Identify directories on the local host.
+1. Set environment variables.
    Example:
+
 
     ```console
     export PGADMIN_DIR=${SENZING_VOLUME}/pgadmin
@@ -300,33 +283,38 @@ see [Environment Variables](https://github.com/Senzing/knowledge-base/blob/main/
     mkdir -p ${PGADMIN_DIR} ${POSTGRES_DIR} ${RABBITMQ_DIR} ${SENZING_VAR_DIR}
     ```
 
-### Deploy docker-compose stack
-
-1. Get docker image version metadata.
+1. Get stable versions of Docker images.
    Example:
 
     ```console
     curl -X GET \
-        --output /tmp/docker-versions-stable.sh \
+        --output ${SENZING_VOLUME}/docker-versions-stable.sh \
         https://raw.githubusercontent.com/Senzing/knowledge-base/main/lists/docker-versions-stable.sh
-    source /tmp/docker-versions-stable.sh
+    source ${SENZING_VOLUME}/docker-versions-stable.sh
     ```
 
-1. Pull docker images.
+1. Download `docker-compose.yaml` and Docker images.
    Example:
 
     ```console
-    cd ${GIT_REPOSITORY_DIR}
+    curl -X GET \
+        --output ${SENZING_VOLUME}/docker-compose.yaml \
+        "https://raw.githubusercontent.com/Senzing/init-mysql/main/docker-compose.yaml"
+    cd ${SENZING_VOLUME}
     sudo --preserve-env docker-compose pull
     ```
 
-1. Launch docker-compose formation.
+1. Bring up Senzing docker-compose stack.
    Example:
 
     ```console
-    cd ${GIT_REPOSITORY_DIR}
+    cd ${SENZING_VOLUME}
     sudo --preserve-env docker-compose up
     ```
+
+1. Allow time for the components to be downloaded, start, and initialize.
+    1. There will be errors in some Docker logs as they wait for dependent services to become available.
+       `docker-compose` isn't the best at orchestrating Docker container dependencies.
 
 ## Develop
 
