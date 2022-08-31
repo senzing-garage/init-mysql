@@ -44,13 +44,8 @@ optional arguments:
     1. [Run command](#run-command)
 1. [Demonstrate using Docker](#demonstrate-using-docker)
     1. [Prerequisites for Docker](#prerequisites-for-docker)
-    1. [Docker volumes](#docker-volumes)
-    1. [Database support](#database-support)
     1. [Run Docker container](#run-docker-container)
 1. [Demonstrate using docker-compose](#demonstrate-using-docker-compose)
-    1. [Clone repository for docker-compose](#clone-repository-for-docker-compose)
-    1. [Volumes](#volumes)
-    1. [Deploy docker-compose stack](#deploy-docker-compose-stack)
 1. [Develop](#develop)
     1. [Prerequisites for development](#prerequisites-for-development)
     1. [Clone repository](#clone-repository)
@@ -269,18 +264,15 @@ These are "one-time tasks" which may already have been completed.
 1. Set environment variables.
    Example:
 
-
     ```console
-    export PGADMIN_DIR=${SENZING_VOLUME}/pgadmin
     export MYSQL_DIR=${SENZING_VOLUME}/mysql
-    export SENZING_VAR_DIR=${SENZING_VOLUME}/var
     ```
 
 1. Create directories.
    Example:
 
     ```console
-    mkdir -p ${PGADMIN_DIR} ${POSTGRES_DIR} ${RABBITMQ_DIR} ${SENZING_VAR_DIR}
+    mkdir -p ${MYSQL_DIR}
     ```
 
 1. Get stable versions of Docker images.
