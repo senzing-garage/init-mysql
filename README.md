@@ -245,7 +245,7 @@ These are "one-time tasks" which may already have been completed.
     sudo docker run \
       --env SENZING_DATABASE_URL \
       --rm \
-      senzing/init-mysql
+      senzing/init-mysql mandatory
     ```
 
 1. For more examples of use, see [Examples of Docker](#examples-of-docker).
