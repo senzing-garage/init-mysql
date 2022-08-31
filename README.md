@@ -93,10 +93,12 @@ describing where we can improve.   Now on with the show...
     export DATABASE_PROTOCOL=mysql
     export DATABASE_USERNAME=g2
     export DATABASE_PASSWORD=g2
-    export DATABASE_HOST=senzing-mysql
+    export DATABASE_HOST=example.com
     export DATABASE_PORT=3306
     export DATABASE_DATABASE=G2
     ```
+
+   **Tip:** Do not set `DATABASE_HOST` to `localhost` nor `127.0.0.1` as that assumes the database is inside the Docker container.
 
 1. Construct Database URL.
    Example:
