@@ -98,7 +98,14 @@ describing where we can improve.   Now on with the show...
     export DATABASE_DATABASE=G2
     ```
 
-   **Tip:** Do not set `DATABASE_HOST` to `localhost` nor `127.0.0.1` as that assumes the database is inside the Docker container.
+1.  **Tip:** Do not set `DATABASE_HOST` to `localhost` nor `127.0.0.1` as that assumes the database is inside the Docker container.
+
+1. :thinking: **Optional:** Here's a method of finding the IP address of the local system.
+   Example:
+
+    ```console
+    export DATABASE_HOST=$(curl --silent https://raw.githubusercontent.com/Senzing/knowledge-base/main/gists/find-local-ip-address/find-local-ip-address.py | python3 -)
+    ```
 
 1. Construct Database URL.
    Example:
