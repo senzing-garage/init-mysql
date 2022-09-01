@@ -100,7 +100,8 @@ describing where we can improve.   Now on with the show...
 
 1.  **Tip:** Do not set `DATABASE_HOST` to `localhost` nor `127.0.0.1` as that assumes the database is inside the Docker container.
 
-1. :thinking: **Optional:** Here's a method of finding the IP address of the local system.
+1. :thinking: **Optional:** If the database is running on the local system,
+   here's a method of finding the IP address of the local system.
    Example:
 
     ```console
