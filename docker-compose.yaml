@@ -15,8 +15,6 @@ services:
     ports:
       - 3306:3306
     restart: always
-    volumes:
-      - ${MYSQL_DIR:-/var/lib/mysql}:/var/lib/mysql
 
   phpmyadmin:
     container_name: senzing-phpmyadmin
