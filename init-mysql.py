@@ -2,10 +2,10 @@
 
 '''
 # -----------------------------------------------------------------------------
-# init-postgresql initializes a PostgreSQL database for use with Senzing.
+# init-mysql initializes a MySQL database for use with Senzing.
 #   - Creates the schema (tables, indexes, etc.)
 #   - Inserts initial Senzing configuration
-#   - init-postgresql.py is idempotent.  It can be run repeatedly.
+#   - init-mysql.py is idempotent.  It can be run repeatedly.
 # -----------------------------------------------------------------------------
 '''
 
@@ -36,7 +36,7 @@ from senzing import G2Config, G2ConfigMgr, G2ModuleException
 __all__ = []
 __version__ = "1.0.0"  # See https://www.python.org/dev/peps/pep-0396/
 __date__ = '2022-08-31'
-__updated__ = '2022-08-31'
+__updated__ = '2022-09-09'
 
 # See https://github.com/Senzing/knowledge-base/blob/main/lists/senzing-product-ids.md
 
@@ -238,19 +238,8 @@ MESSAGE_DEBUG = 900
 
 MESSAGE_DICTIONARY = {
     "100": "senzing-" + SENZING_PRODUCT_ID + "{0:04d}I",
-    "163": "{0} - Configuring for Senzing database cluster based on SENZING_ENGINE_CONFIGURATION_JSON",
     "170": "Created new default config in SYS_CFG having ID {0}",
     "171": "Default config in SYS_CFG already exists having ID {0}",
-    "180": "{0} - Postgresql detected.  Installing governor from {1}",
-    "181": "{0} - Postgresql detected. Using existing governor; no change.",
-    "182": "Initializing for SQLite",
-    "183": "Initializing for Db2",
-    "184": "Initializing for MS SQL",
-    "185": "Initializing for MySQL",
-    "186": "Initializing for PostgreSQL",
-    "187": "{0} - Directory does not exist; no change.",
-    "188": "{0} - Cannot write to read-only filesystem; no change.",
-    "292": "Configuration change detected.  Old: {0} New: {1}",
     "293": "For information on warnings and errors, see https://github.com/Senzing/stream-loader#errors",
     "294": "Version: {0}  Updated: {1}",
     "295": "Sleeping infinitely.",
@@ -259,20 +248,17 @@ MESSAGE_DICTIONARY = {
     "298": "Exit {0}",
     "299": "{0}",
     "300": "senzing-" + SENZING_PRODUCT_ID + "{0:04d}W",
-    "301": "Could not download the senzing postgresql governor from {0}. Ignore this on air gapped systems. Exception details: {1}",
     "499": "{0}",
     "500": "senzing-" + SENZING_PRODUCT_ID + "{0:04d}E",
-    "510": "{0} - File is missing.",
-    "695": "Unknown database scheme '{0}' in database url '{1}'",
+    "568": "Original and new database URLs do not match. Original URL: {0}; Reconstructed URL: {1}",
     "696": "Bad SENZING_SUBCOMMAND: {0}.",
     "697": "No processing done.",
     "698": "Program terminated with error.",
     "699": "{0}",
     "700": "senzing-" + SENZING_PRODUCT_ID + "{0:04d}E",
     "701": "Missing required parameter: {0}",
-    "879": "Senzing SDK was not imported.",
-    "885": "License has expired.",
-    "891": "Original and new database URLs do not match. Original URL: {0}; Reconstructed URL: {1}",
+    "702": "SQL.execute error: {0}",
+    "730": "There are not enough safe characters to do the translation. Unsafe Characters: {0}; Safe Characters: {1}",
     "896": "Could not initialize G2ConfigMgr with '{0}'. Error: {1}",
     "897": "Could not initialize G2Config with '{0}'. Error: {1}",
     "899": "{0}",
@@ -701,11 +687,6 @@ def get_db_parameters(database_url):
     ''' Tokenize a database URL. '''
 
     parsed_database_url = parse_database_url(database_url)
-
-    # logging.error(message_error(999, "parsed_database_url: {0}".format(parsed_database_url)))
-    # dbname = parsed_database_url.get('path')[1:]
-    # logging.error(message_error(999, "dbname: {0}".format(dbname)))
-
     result = {
         'database': parsed_database_url.get('schema', ""),
         'user': parsed_database_url.get('username', ""),
@@ -733,9 +714,9 @@ def process_sql_file(input_url, db_parameters):
                         db_cursor.close()
                     except (mysql.connector.errors.ProgrammingError, mysql.connector.errors.IntegrityError) as error:
                         err_message = ' '.join(str(error).split())
-                        logging.error(message_error(999, err_message))
+                        logging.error(message_error(702, err_message))
                     except Exception as error:
-                        logging.error(message_error(999, "{0} - {1}".format(type(error), ' '.join(str(error).split()))))
+                        logging.error(message_error(702, "{0} - {1}".format(type(error), ' '.join(str(error).split()))))
 
     if db_connection is not None:
         db_connection.close()
@@ -764,6 +745,7 @@ def get_g2_configuration_dictionary(config):
             "SUPPORTPATH": config.get("data_dir"),
         },
         "SQL": {
+            "BACKEND": "SQL",
             "CONNECTION": create_senzing_database_connection_string(config.get('database_url')),
         }
     }
