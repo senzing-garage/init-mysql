@@ -170,7 +170,7 @@ def get_parser():
             "--database-url": {
                 "dest": "database_url",
                 "metavar": "SENZING_DATABASE_URL",
-                "help": "URL of PostgreSQL database. Default: none"
+                "help": "URL of MySQL database. Default: none"
             },
             "--debug": {
                 "dest": "debug",
@@ -631,7 +631,7 @@ class G2Initializer:
 
         # Add configuration to G2 database SYS_CFG table.
 
-        new_configuration_comments = "Configuration modified by init-postgresql"
+        new_configuration_comments = "Configuration modified by init-mysql"
         new_configuration_id_bytearray = bytearray()
         self.g2_configuration_manager.addConfig(new_configuration_json, new_configuration_comments, new_configuration_id_bytearray)
 
@@ -751,7 +751,7 @@ def parse_database_url(original_senzing_database_url):
 
 
 def create_senzing_database_connection_string(database_url):
-    '''Transform PostgreSQL URL to a format Senzing understands.'''
+    '''Transform MySQL URL to a format Senzing understands.'''
     parsed_database_url = parse_database_url(database_url)
     return "{scheme}://{username}:{password}@{hostname}:{port}/?schema={schema}".format(**parsed_database_url)
 
