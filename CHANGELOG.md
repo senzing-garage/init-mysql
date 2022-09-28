@@ -30,5 +30,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added to 1.0.0
 
 - Initial functionality for "mandatory" subcommand
-    - Create schema
-    - Insert initial Senzing configuration
+  - Create schema
+  - Insert initial Senzing configuration
