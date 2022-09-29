@@ -5,7 +5,7 @@ ENV REFRESHED_AT=2022-09-27
 
 LABEL Name="senzing/init-mysql" \
       Maintainer="support@senzing.com" \
-      Version="1.1.0"
+      Version="1.1.1"
 
 # Define health check.
 
