@@ -198,6 +198,6 @@ with any relevant licenses for all software contained within.
 1. [Development](docs/development.md)
 1. [Errors](docs/errors.md)
 1. [Examples](docs/examples.md)
-1. Related artifacts
+1. Related artifacts:
     1. [DockerHub](https://hub.docker.com/r/senzing/init-mysql)
     1. [Helm Chart](https://github.com/Senzing/charts/tree/main/charts/senzing-init-mysql)
