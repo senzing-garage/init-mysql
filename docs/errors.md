@@ -1,1 +1,1 @@
-## Errors
+# init-mysql errors
