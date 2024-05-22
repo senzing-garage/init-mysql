@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 [markdownlint](https://dlaa.me/markdownlint/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.7] - 2024-05-22
+
+### Changed in 1.1.7
+
+- In `Dockerfile`, updated FROM instruction to `senzing/senzingapi-runtime:3.10.1`
+- In `requirements.txt`, updated:
+  - mysql-connector-python==8.4.0
+
 ## [1.1.6] - 2023-09-30
 
 ### Changed in 1.1.6
