@@ -1,11 +1,11 @@
-ARG BASE_IMAGE=senzing/senzingapi-runtime:3.9.0
+ARG BASE_IMAGE=senzing/senzingapi-runtime:3.10.1
 FROM ${BASE_IMAGE}
 
-ENV REFRESHED_AT=2024-03-18
+ENV REFRESHED_AT=2024-05-22
 
 LABEL Name="senzing/init-mysql" \
-      Maintainer="support@senzing.com" \
-      Version="1.1.6"
+  Maintainer="support@senzing.com" \
+  Version="1.1.7"
 
 # Define health check.
 
@@ -18,38 +18,38 @@ USER root
 # Install packages via apt.
 
 RUN apt-get update \
- && apt-get -y install \
-      gnupg2 \
-      libaio1 \
-      libodbc1 \
-      python3 \
-      python3-pip \
-      software-properties-common \
-      wget \
- && rm -rf /var/lib/apt/lists/*
+  && apt-get -y install \
+  gnupg2 \
+  libaio1 \
+  libodbc1 \
+  python3 \
+  python3-pip \
+  software-properties-common \
+  wget \
+  && rm -rf /var/lib/apt/lists/*
 
 # MySQL support
 
 RUN wget https://dev.mysql.com/get/Downloads/Connector-ODBC/8.0/mysql-connector-odbc_8.0.20-1debian10_amd64.deb \
- && wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-common_8.0.20-1debian10_amd64.deb \
- && wget http://repo.mysql.com/apt/debian/pool/mysql-8.0/m/mysql-community/libmysqlclient21_8.0.20-1debian10_amd64.deb \
- && apt update \
- && apt -y install \
-      ./mysql-connector-odbc_8.0.20-1debian10_amd64.deb \
-      ./mysql-common_8.0.20-1debian10_amd64.deb \
-      ./libmysqlclient21_8.0.20-1debian10_amd64.deb \
- && rm \
-      ./mysql-connector-odbc_8.0.20-1debian10_amd64.deb \
-      ./mysql-common_8.0.20-1debian10_amd64.deb \
-      ./libmysqlclient21_8.0.20-1debian10_amd64.deb \
- && rm -rf /var/lib/apt/lists/*
+  && wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-common_8.0.20-1debian10_amd64.deb \
+  && wget http://repo.mysql.com/apt/debian/pool/mysql-8.0/m/mysql-community/libmysqlclient21_8.0.20-1debian10_amd64.deb \
+  && apt update \
+  && apt -y install \
+  ./mysql-connector-odbc_8.0.20-1debian10_amd64.deb \
+  ./mysql-common_8.0.20-1debian10_amd64.deb \
+  ./libmysqlclient21_8.0.20-1debian10_amd64.deb \
+  && rm \
+  ./mysql-connector-odbc_8.0.20-1debian10_amd64.deb \
+  ./mysql-common_8.0.20-1debian10_amd64.deb \
+  ./libmysqlclient21_8.0.20-1debian10_amd64.deb \
+  && rm -rf /var/lib/apt/lists/*
 
 # Install packages via PIP.
 
 COPY requirements.txt .
 RUN pip3 install --upgrade pip \
- && pip3 install -r requirements.txt \
- && rm /requirements.txt
+  && pip3 install -r requirements.txt \
+  && rm /requirements.txt
 
 # Copy files from repository.
 
