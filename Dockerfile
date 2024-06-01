@@ -15,7 +15,7 @@ HEALTHCHECK CMD ["/app/healthcheck.sh"]
 
 USER root
 
-# Install packages via apt.
+# Install packages via apt-get.
 
 RUN apt-get update \
   && apt-get -y install \
@@ -33,8 +33,8 @@ RUN apt-get update \
 RUN wget https://dev.mysql.com/get/Downloads/Connector-ODBC/8.0/mysql-connector-odbc_8.0.20-1debian10_amd64.deb \
   && wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-common_8.0.20-1debian10_amd64.deb \
   && wget http://repo.mysql.com/apt/debian/pool/mysql-8.0/m/mysql-community/libmysqlclient21_8.0.20-1debian10_amd64.deb \
-  && apt update \
-  && apt -y install \
+  && apt-get update \
+  && apt-get -y install \
   ./mysql-connector-odbc_8.0.20-1debian10_amd64.deb \
   ./mysql-common_8.0.20-1debian10_amd64.deb \
   ./libmysqlclient21_8.0.20-1debian10_amd64.deb \
